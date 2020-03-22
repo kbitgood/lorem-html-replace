@@ -1,0 +1,11 @@
+{
+  "name": "lorum-html-replace",
+  "version": "1.0.0",
+  "description": "Replace all text in an HTML file with lorum ipsum sample text",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kenneth Bitgood",
+  "license": "ISC"
+}
