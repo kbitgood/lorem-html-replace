@@ -1,4 +1,4 @@
-# Lorem Ipsum
+# Lorem HTML Replace
 
 This is a tool for replacing all the text in HTML files with Lorum Ipsum garble-de-gook
 
