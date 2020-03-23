@@ -4,8 +4,12 @@ const argv = require('yargs')
     .option('input', {
         alias: 'i',
         describe: 'input file(s)',
-        type: 'array',
-        demandOption: true
+        type: 'array'
+    })
+    .option('folder', {
+        alias: 'f',
+        describe: 'input folder',
+        type: 'string'
     })
     .option('output', {
         alias: 'o',
@@ -31,6 +35,30 @@ const argv = require('yargs')
         describe: 'list of element types to exclude, eg: --exclude p a'
     })
     .argv;
+
+if(!argv.input && !argv.folder) {
+    console.error('missing input file or folder');
+}
+
+function getAllHTMLFilesInDirectory(dir) {
+    const allFiles = [];
+    const filesHere = fs.readdirSync(dir);
+    for(let i = 0; i < filesHere.length; i++) {
+        const file = filesHere[i];
+        if(file.match(/^\./) === null) {
+            if(fs.lstatSync(dir+'/'+file).isDirectory()) {
+                allFiles.push(...getAllHTMLFilesInDirectory(dir+'/'+file));
+            } else if(file.match(/\.html$/) !== null) {
+                allFiles.push(dir + '/' + file);
+            }
+        }
+    }
+    return allFiles;
+}
+
+if (argv.folder) {
+    argv.input = getAllHTMLFilesInDirectory(argv.folder);
+}
 
 if(!argv.headers) {
     argv.exclude = [...argv.exclude, 'h1','h2','h3','h4','h5','h6'];
