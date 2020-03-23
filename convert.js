@@ -95,7 +95,7 @@ function toTitleCase(text) {
 }
 
 
-function replaceHTMLTextWithLorumIpsum(inputFile) {
+function replaceHTMLTextWithLoremIpsum(inputFile) {
 
     const inputHTML = fs.readFileSync(inputFile);
     const { JSDOM } = require('jsdom');
@@ -142,6 +142,6 @@ function replaceHTMLTextWithLorumIpsum(inputFile) {
 }
 
 for(let i = 0; i < argv.input.length; i++) {
-    let output = argv.output[i] || argv.input[i].match(/^(.*?)(\.\w+|$)/)[1] + '-lorum-ipsum.html';
-    fs.writeFileSync(output, replaceHTMLTextWithLorumIpsum(argv.input[i]));
+    let output = argv.output[i] || argv.input[i].match(/^(.*?)(\.\w+|$)/)[1] + '-lorem-ipsum.html';
+    fs.writeFileSync(output, replaceHTMLTextWithLoremIpsum(argv.input[i]));
 }
